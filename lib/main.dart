@@ -36,7 +36,7 @@ class MyHomePage extends StatelessWidget {
         title: Text('Expense App'),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Card(
             child: Container(
@@ -46,10 +46,54 @@ class MyHomePage extends StatelessWidget {
             color: Colors.blue,
             elevation: 5,
           ),
-          Card(
-            color: Colors.red,
-            child: Container(child: Text('List of expenses')),
-          ),
+          Column(
+              children: transactions.map((transaction) {
+            return Card(
+                child: Row(
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                    color: Colors.purple.shade400,
+                    width: 2,
+                  )),
+                  padding: EdgeInsets.all(10),
+                  child: Text(
+                    transaction.amount.toString(),
+                    style: TextStyle(
+                      fontFamily: 'Source Sans Pro',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: Colors.purple.shade400,
+                    ),
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      transaction.title,
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                    Text(
+                      transaction.date.toString(),
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.normal,
+                        fontSize: 12,
+                        color: Colors.grey,
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ));
+          }).toList()),
         ],
       ),
     );

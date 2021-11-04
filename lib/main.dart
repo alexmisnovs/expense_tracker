@@ -52,11 +52,42 @@ class MyHomePage extends StatelessWidget {
                 child: Row(
               children: [
                 Container(
-                    child: Text(transaction.amount.toString()), width: 100),
+                    margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                      color: Colors.purple.shade400,
+                      width: 2,
+                    )),
+                    padding: EdgeInsets.all(10),
+                    child: Text(
+                      transaction.amount.toString(),
+                      style: TextStyle(
+                        fontFamily: 'Source Sans Pro',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Colors.purple.shade400,
+                      ),
+                    ),
+                    width: 100),
                 Column(
                   children: [
-                    Text(transaction.title),
-                    Text(transaction.date.toString())
+                    Text(
+                      transaction.title,
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
+                    ),
+                    Text(
+                      transaction.date.toString(),
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.normal,
+                        fontSize: 12,
+                        color: Colors.grey,
+                      ),
+                    )
                   ],
                 )
               ],

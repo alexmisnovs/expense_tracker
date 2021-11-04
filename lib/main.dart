@@ -52,31 +52,32 @@ class MyHomePage extends StatelessWidget {
                 child: Row(
               children: [
                 Container(
-                    margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                    decoration: BoxDecoration(
-                        border: Border.all(
+                  margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                    color: Colors.purple.shade400,
+                    width: 2,
+                  )),
+                  padding: EdgeInsets.all(10),
+                  child: Text(
+                    transaction.amount.toString(),
+                    style: TextStyle(
+                      fontFamily: 'Source Sans Pro',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
                       color: Colors.purple.shade400,
-                      width: 2,
-                    )),
-                    padding: EdgeInsets.all(10),
-                    child: Text(
-                      transaction.amount.toString(),
-                      style: TextStyle(
-                        fontFamily: 'Source Sans Pro',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: Colors.purple.shade400,
-                      ),
                     ),
-                    width: 100),
+                  ),
+                ),
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       transaction.title,
                       style: TextStyle(
                         fontFamily: 'Roboto',
                         fontWeight: FontWeight.bold,
-                        fontSize: 15,
+                        fontSize: 16,
                       ),
                     ),
                     Text(

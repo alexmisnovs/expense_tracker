@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
           return GestureDetector(
             child: NewTransaction(_addNewTransaction),
             onTap: () {},
-            behavior: HitTestBehavior.opaque,
+            // behavior: HitTestBehavior.opaque,
           );
         });
     print('New transaction started');

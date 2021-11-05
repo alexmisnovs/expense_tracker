@@ -105,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             Container(
               child: Card(
-                child: Text('Chart goes here'),
+                child: Text('Chart will go here'),
                 color: Colors.blue,
                 elevation: 5,
               ),

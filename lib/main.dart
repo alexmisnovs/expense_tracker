@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-
-import './transaction.dart';
+import './widgets/user_transactions.dart';
 
 void main() => runApp(MyApp());
 
@@ -16,20 +14,9 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  final List<Transaction> transactions = [
-    Transaction(
-      id: 't1',
-      title: 'New Shoes',
-      amount: 69.99,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Weekly Groceries',
-      amount: 16.53,
-      date: DateTime.now(),
-    ),
-  ];
+  // String titleInput;
+  // String amountInput;
+// inputs always strings.. Need to convert manually
 
   @override
   Widget build(BuildContext context) {
@@ -47,75 +34,7 @@ class MyHomePage extends StatelessWidget {
               elevation: 5,
             ),
           ),
-          Card(
-              child: Container(
-            padding: EdgeInsets.all(10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                TextField(
-                  decoration: InputDecoration(labelText: 'Title'),
-                ),
-                TextField(
-                  decoration: InputDecoration(labelText: 'Amount'),
-                ),
-                FlatButton(
-                  child: Text('Add Transaction'),
-                  textColor: Colors.purple,
-                  onPressed: () {},
-                ),
-              ],
-            ),
-          )),
-          Column(
-              children: transactions.map((transaction) {
-            return Card(
-                child: Row(
-              children: [
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                    color: Colors.purple.shade400,
-                    width: 2,
-                  )),
-                  padding: EdgeInsets.all(10),
-                  child: Text(
-                    // '\$${transaction.amount}', // dollars
-                    '£ ${transaction.amount}', // pounds
-                    style: TextStyle(
-                      fontFamily: 'Source Sans Pro',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Colors.purple.shade400,
-                    ),
-                  ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      transaction.title,
-                      style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-                    Text(
-                      DateFormat.yMMMMd().format(transaction.date),
-                      style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.normal,
-                        fontSize: 12,
-                        color: Colors.grey,
-                      ),
-                    )
-                  ],
-                )
-              ],
-            ));
-          }).toList()),
+          UserTransactions()
         ],
       ),
     );

@@ -13,6 +13,22 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.purple,
         accentColor: Colors.amber,
         fontFamily: 'Roboto',
+        appBarTheme: AppBarTheme(
+          toolbarTextStyle: const TextTheme(
+            headline6: TextStyle(
+              fontFamily: 'Source Sans Pro',
+              fontSize: 20,
+              // fontWeight: FontWeight.bold,
+            ),
+          ).bodyText2,
+          titleTextStyle: const TextTheme(
+            headline6: TextStyle(
+              fontFamily: 'Roboto',
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ).headline6,
+        ),
       ),
       title: 'Expense Tracker App',
       home: MyHomePage(),

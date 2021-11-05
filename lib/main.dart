@@ -60,7 +60,8 @@ class MyHomePage extends StatelessWidget {
                   )),
                   padding: EdgeInsets.all(10),
                   child: Text(
-                    transaction.amount.toString(),
+                    // '\$${transaction.amount}', // dollars
+                    '£ ${transaction.amount}', // pounds
                     style: TextStyle(
                       fontFamily: 'Source Sans Pro',
                       fontWeight: FontWeight.bold,

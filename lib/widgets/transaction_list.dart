@@ -13,7 +13,6 @@ class TransactionList extends StatelessWidget {
         height: 300,
         child: transactions.isEmpty
             ? Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
                   Text('No transactions added yet!',
                       style: Theme.of(context).textTheme.headline6),

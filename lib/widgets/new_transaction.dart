@@ -5,6 +5,19 @@ class NewTransaction extends StatelessWidget {
   final amountController = TextEditingController();
 
   final Function addTransaction;
+  void submitData() {
+    final enteredTitle = titleController.text;
+    final enteredAmount = double.parse(amountController.text);
+    // converts to a double. need to handle error if string is passed
+    if (enteredTitle.isEmpty || enteredAmount <= 0) {
+      return;
+    }
+
+    addTransaction(
+      enteredTitle,
+      enteredAmount,
+    );
+  }
 
   NewTransaction(this.addTransaction);
 
@@ -22,6 +35,7 @@ class NewTransaction extends StatelessWidget {
             // },
             controller: titleController,
             decoration: InputDecoration(labelText: 'Title'),
+            onSubmitted: (_) => submitData(),
           ),
           TextField(
             // onChanged: (value) {
@@ -29,18 +43,13 @@ class NewTransaction extends StatelessWidget {
             // },
             controller: amountController,
             decoration: InputDecoration(labelText: 'Amount'),
+            keyboardType: TextInputType.numberWithOptions(decimal: true),
+            onSubmitted: (_) => submitData(),
           ),
           FlatButton(
             child: Text('Add Transaction'),
             textColor: Colors.purple,
-            onPressed: () {
-              addTransaction(
-                  titleController.text,
-                  double.parse(amountController
-                      .text)); // converts to a double. need to handle error if string is passed
-              // print('Entered title: ${titleInput}');
-              // print('Entered amount: ${amountInput}');
-            },
+            onPressed: submitData,
           ),
         ],
       ),

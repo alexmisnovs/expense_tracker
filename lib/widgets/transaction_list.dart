@@ -26,7 +26,7 @@ class TransactionList extends StatelessWidget {
                   padding: EdgeInsets.all(10),
                   child: Text(
                     // '\$${transaction.amount}', // dollars
-                    '£ ${transactions[index].amount}', // pounds
+                    '£ ${transactions[index].amount.toStringAsFixed(2)}', // pounds
                     style: TextStyle(
                       fontFamily: 'Source Sans Pro',
                       fontWeight: FontWeight.bold,

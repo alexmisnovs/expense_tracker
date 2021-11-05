@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import './transaction.dart';
+import './widgets/transaction_list.dart';
+import './widgets/new_transaction.dart';
+import './models/transaction.dart';
 
 void main() => runApp(MyApp());
 
@@ -7,14 +9,44 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.purple,
+        accentColor: Colors.amber,
+        fontFamily: 'Roboto',
+        appBarTheme: AppBarTheme(
+          toolbarTextStyle: const TextTheme(
+            headline6: TextStyle(
+              fontFamily: 'Source Sans Pro',
+              fontSize: 20,
+              // fontWeight: FontWeight.bold,
+            ),
+          ).bodyText2,
+          titleTextStyle: const TextTheme(
+            headline6: TextStyle(
+              fontFamily: 'Roboto',
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ).headline6,
+        ),
+      ),
       title: 'Expense Tracker App',
       home: MyHomePage(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  final List<Transaction> transactions = [
+class MyHomePage extends StatefulWidget {
+  // String titleInput;
+  // String amountInput;
+// inputs always strings.. Need to convert manually
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final List<Transaction> _userTransactions = [
     Transaction(
       id: 't1',
       title: 'New Shoes',
@@ -29,72 +61,63 @@ class MyHomePage extends StatelessWidget {
     ),
   ];
 
+  void _addNewTransaction(String transactionTitle, double transactionAmount) {
+    final newTransaction = Transaction(
+      title: transactionTitle,
+      amount: transactionAmount,
+      date: DateTime.now(),
+      id: DateTime.now().toString(),
+    );
+
+    setState(() {
+      _userTransactions.add(newTransaction);
+    });
+  }
+
+  void _startNewTransaction(BuildContext ctx) {
+    showModalBottomSheet(
+        context: ctx,
+        builder: (_) {
+          return GestureDetector(
+            child: NewTransaction(_addNewTransaction),
+            onTap: () {},
+            // behavior: HitTestBehavior.opaque,
+          );
+        });
+    print('New transaction started');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Expense App'),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Card(
-            child: Container(
-              child: Text('Chart goes here'),
-              width: 100,
-            ),
-            color: Colors.blue,
-            elevation: 5,
-          ),
-          Column(
-              children: transactions.map((transaction) {
-            return Card(
-                child: Row(
-              children: [
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                    color: Colors.purple.shade400,
-                    width: 2,
-                  )),
-                  padding: EdgeInsets.all(10),
-                  child: Text(
-                    transaction.amount.toString(),
-                    style: TextStyle(
-                      fontFamily: 'Source Sans Pro',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Colors.purple.shade400,
-                    ),
-                  ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      transaction.title,
-                      style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-                    Text(
-                      transaction.date.toString(),
-                      style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.normal,
-                        fontSize: 12,
-                        color: Colors.grey,
-                      ),
-                    )
-                  ],
-                )
-              ],
-            ));
-          }).toList()),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () => _startNewTransaction(context),
+          )
         ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          // mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              child: Card(
+                child: Text('Chart goes here'),
+                color: Colors.blue,
+                elevation: 5,
+              ),
+            ),
+            TransactionList(_userTransactions),
+          ],
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () => _startNewTransaction(context),
       ),
     );
   }

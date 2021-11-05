@@ -35,7 +35,9 @@ class NewTransaction extends StatelessWidget {
             textColor: Colors.purple,
             onPressed: () {
               addTransaction(
-                  titleController.text, double.parse(amountController.text));
+                  titleController.text,
+                  double.parse(amountController
+                      .text)); // converts to a double. need to handle error if string is passed
               // print('Entered title: ${titleInput}');
               // print('Entered amount: ${amountInput}');
             },

@@ -38,16 +38,35 @@ class MyHomePage extends StatelessWidget {
         title: Text('Expense App'),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+        // mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Card(
-            child: Container(
+          Container(
+            child: Card(
               child: Text('Chart goes here'),
-              width: 100,
+              color: Colors.blue,
+              elevation: 5,
             ),
-            color: Colors.blue,
-            elevation: 5,
           ),
+          Card(
+              child: Container(
+            padding: EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                TextField(
+                  decoration: InputDecoration(labelText: 'Title'),
+                ),
+                TextField(
+                  decoration: InputDecoration(labelText: 'Amount'),
+                ),
+                FlatButton(
+                  child: Text('Add Transaction'),
+                  textColor: Colors.purple,
+                  onPressed: () {},
+                ),
+              ],
+            ),
+          )),
           Column(
               children: transactions.map((transaction) {
             return Card(
